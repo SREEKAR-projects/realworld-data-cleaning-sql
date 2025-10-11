@@ -43,7 +43,8 @@ FROM layoffs_staging;
 SET SQL_SAFE_UPDATES = 0;
 delete 
 from layoffs_staging2
-where rown =2 ;
+where rown >1 ;
+
 -- Standardization
  
 select company, trim(company)
@@ -109,9 +110,29 @@ JOIN layoffs_staging2 t2
 SET t1.industry = t2.industry
 WHERE t1.industry IS NULL
   AND t2.industry IS NOT NULL;
-  
-  select *
-  from layoffs_staging2
+
+select*
+from layoffs_staging2
+where total_laid_off is null and percentage_laid_off is null;
+
+delete
+from layoffs_staging2
+where total_laid_off is null and percentage_laid_off is null;
+
+select*
+from layoffs_staging2
+where rown > 1;
+
+alter table layoffs_staging2
+drop column rown;
+
+select*
+from layoffs_staging2
+
+
+
+
+
 
 
 
